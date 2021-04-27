@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
+    <title>mentorci</title>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+      crossorigin="anonymous"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/dc/3.0.12/dc.min.css"
+    />
+  </head>
+  <body id="pageTop">
+    <noscript>
+      <strong
+        >We're sorry but mentorci doesn't work properly without JavaScript
+        enabled. Please enable it to continue.</strong
+      >
+    </noscript>
+    <div id="app"></div>
+    <div id="alertModal" class="modal">
+      <div class="modal-content">
+        <span></span>
+        <p></p>
+      </div>
+    </div>
+    <!-- built files will be auto injected -->
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.2/d3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crossfilter/1.3.12/crossfilter.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dc/3.0.12/dc.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll@16.0.3/dist/smooth-scroll.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        var scroll = new SmoothScroll('a[href*="#"]', {
+          speed: 300,
+          speedAsDuration: true
+        });
+        window.alert = (text, type) => {
+          if (type == "success") {
+            $("#alertModal span").html("Success!");
+            $("#alertModal span").addClass("green-text");
+          } else {
+            $("#alertModal span").html("Something went wrong");
+            $("#alertModal span").addClass("red-text");
+          }
+          $("#alertModal p").html(text);
+          $("#alertModal").modal("open");
+        };
+      });
+    </script>
+  </body>
+</html>
