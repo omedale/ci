@@ -5,7 +5,7 @@ if ! [ -x "$(command -v docker-compose)" ]; then
   exit 1
 fi
 
-domains=(api.mentorci.online)
+domains=(thawing-woodland-78827.herokuapp.com)
 rsa_key_size=4096
 data_path="./data/certbot"
 email="ngeneanthony@gmail.com" # Adding a valid address is strongly recommended
