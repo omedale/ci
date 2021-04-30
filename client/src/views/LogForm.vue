@@ -3,7 +3,10 @@
     <div v-if="student && mentor">
       <h4 class="center">
         Log Session with
-        <router-link :to="{ name: 'student-detail', params: { id: student.id } }">{{ student.name }}</router-link>
+        <router-link
+          :to="{ name: 'student-detail', params: { id: student.id } }"
+          >{{ student.name }}</router-link
+        >
       </h4>
       <div class="row">
         <form id="createLogForm" class="col s12" @submit.prevent="createLog">
@@ -14,15 +17,34 @@
             </div>
 
             <div class="input-field col m2 s4">
-              <input type="number" v-model="hours" min="0" max="99" id="hours" />
+              <input
+                type="number"
+                v-model="hours"
+                min="0"
+                max="99"
+                id="hours"
+              />
               <label class="active" for="hours">(hours)</label>
             </div>
             <div class="input-field col m2 s4">
-              <input type="number" v-model="minutes" min="0" max="60" id="mins" required />
+              <input
+                type="number"
+                v-model="minutes"
+                min="0"
+                max="60"
+                id="mins"
+                required
+              />
               <label class="active" for="mins">(minutes)</label>
             </div>
             <div class="input-field col m2 s4">
-              <input type="number" v-model="seconds" min="0" max="60" id="secs" />
+              <input
+                type="number"
+                v-model="seconds"
+                min="0"
+                max="60"
+                id="secs"
+              />
               <label class="active" for="secs">(seconds)</label>
             </div>
           </div>
@@ -33,20 +55,31 @@
                   v-for="stype in sessionTypes"
                   v-bind:key="stype[0]"
                   :value="stype[0]"
-                >{{ stype[1] }}</option>
+                  >{{ stype[1] }}</option
+                >
               </select>
               <label>Session Type</label>
             </div>
             <div class="input-field col m6 s12">
               <select id="logFormProjects" v-model="log.projects" multiple>
-                <option v-for="proj in projects" v-bind:key="proj[0]" :value="proj[0]">{{ proj[1] }}</option>
+                <option
+                  v-for="proj in projects"
+                  v-bind:key="proj[0]"
+                  :value="proj[0]"
+                  >{{ proj[1] }}</option
+                >
               </select>
               <label>Project Covered</label>
             </div>
           </div>
           <div class="row">
             <div class="input-field col s12">
-              <textarea id="summary" v-model="log.summary" class="materialize-textarea" required></textarea>
+              <textarea
+                id="summary"
+                v-model="log.summary"
+                class="materialize-textarea"
+                required
+              ></textarea>
               <label for="summary">Summary</label>
             </div>
           </div>
@@ -57,18 +90,22 @@
                   v-for="feeling in feelings"
                   v-bind:key="feeling[0]"
                   :value="feeling[0]"
-                >{{ feeling[1] }}</option>
+                  >{{ feeling[1] }}</option
+                >
               </select>
               <label>
-                What is your general feeling on the student's progress so
-                far?
+                What is your general feeling on the student's progress so far?
               </label>
             </div>
           </div>
           <div v-show="showMore" class="more-options">
             <div class="row">
               <div class="input-field col s12">
-                <textarea id="concern" v-model="log.concern" class="materialize-textarea"></textarea>
+                <textarea
+                  id="concern"
+                  v-model="log.concern"
+                  class="materialize-textarea"
+                ></textarea>
                 <label for="concern">
                   Are there any issues that you'd like Student Care to help
                   address?
@@ -78,9 +115,7 @@
           </div>
           <div class="right">
             <a @click="toggleShowMore" class="btn-small">
-              {{
-              showMore ? "Less..." : "More..."
-              }}
+              {{ showMore ? "Less..." : "More..." }}
             </a>
           </div>
 
@@ -100,7 +135,9 @@
               @click.prevent="deleteLog"
               v-show="this.$route.params.logid"
               class="btn red"
-            >Delete</button>
+            >
+              Delete
+            </button>
           </div>
         </form>
       </div>
@@ -122,7 +159,7 @@ export default {
     return {
       log: {
         student: 0,
-        studentName: '',
+        studentName: "",
         mentor: 0,
         date: undefined,
         duration: "",
@@ -130,25 +167,25 @@ export default {
         concern: "",
         projects: [],
         summary: "",
-        feeling: "average"
+        feeling: "average",
       },
       hours: undefined,
       minutes: undefined,
       seconds: undefined,
       sessionType: [],
       showMore: false,
-      runE2E: false
+      runE2E: false,
     };
   },
   mounted() {
     if (this.$route.params.logid) {
       const log = this.$store.state.logs.logs.filter(
-        lg => lg.id == this.$route.params.logid
+        (lg) => lg.id == this.$route.params.logid
       )[0];
       if (log) {
         const [hours, minutes, seconds] = log.duration
           .split("-")
-          .map(i => Number(i));
+          .map((i) => Number(i));
         this.log = log;
         if (typeof log.projects === "string")
           this.log.projects = JSON.parse(log.projects);
@@ -165,7 +202,7 @@ export default {
   computed: {
     student() {
       let filtered = this.$store.state.students.students.filter(
-        st => st.id == this.$route.params.id
+        (st) => st.id == this.$route.params.id
       );
       if (filtered.length > 0) return filtered[0];
       return undefined;
@@ -225,7 +262,7 @@ export default {
     },
     projects() {
       return this.$store.state.options.options.projects;
-    }
+    },
   },
   methods: {
     fillGoogleForm(e) {
@@ -253,7 +290,7 @@ export default {
         concern: this.log.concern,
         projects: JSON.stringify(this.log.projects),
         summary: this.log.summary,
-        feeling: this.log.feeling
+        feeling: this.log.feeling,
       };
 
       let newLog;
@@ -272,8 +309,8 @@ export default {
     deleteLog() {
       const confirmDelete = confirm("Sure?");
       if (confirmDelete) this.$store.dispatch("logs/deleteLog", this.log);
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -288,4 +325,3 @@ export default {
   margin-left: 30px;
 }
 </style>
-
