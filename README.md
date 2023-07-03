@@ -1,4 +1,5 @@
-[![Build Status](https://travis-ci.org/tonymontaro/mentorci.svg?branch=master)](https://travis-ci.org/tonymontaro/mentorci)
+Cloned from https://github.com/tonymontaro/mentorci
+
 
 # MentorCI API
 
